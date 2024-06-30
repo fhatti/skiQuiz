@@ -1,16 +1,22 @@
-import { useState } from "react";
-import Quiz from "./components/Quiz";
+import React, { useState } from "react";
+import QuizStart from "./components/QuizStart";
 import Questions from "./components/Questions";
 
-function App() {
+const App = () => {
+  const [playerName, setPlayerName] = useState("");
+  const startQuiz = (name) => {
+    setPlayerName(name);
+  };
 
-  const [stepOne, setStepOne] = useState(false)
-  const [name,setName] = useState("")
   return (
-    <main className="flex justify-center items-center bg-bgColor h-[100vh]">
-      {stepOne ?  <Questions name={name}/> : <Quiz setStepOne={setStepOne} setName={setName}/>}
-    </main>
+    <div className=" bg-bgColor p-10 flex justify-center items-center text-center h-[100vh]  ">
+      {playerName ? (
+        <Questions playerName={playerName} startQuiz={startQuiz} />
+      ) : (
+        <QuizStart startQuiz={startQuiz} />
+      )}
+    </div>
   );
-}
+};
 
 export default App;

@@ -7,11 +7,12 @@ export default {
   theme: {
     extend: {},
     colors:{
-      bgColor: "#fbf3ee",
-      main:"#1a20ca",
-      second:"#1a20ca",
-      highlight:"#025b53",
-      correct:"#c70202",
+      bgColor: "#2b2f2d",
+      main:"#ab9b71",
+      second:"#fff",
+      highlight:"#00d6e9",
+      correct:"#0b6623",
+      wrong:"#c70202",
     },
   },
   plugins: [],
