@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import Leaderboard from "./Leaderboard";
+import { specialCharacters } from "../constants";
 
 const QuizStart = ({ startQuiz }) => {
   const [name, setName] = useState("");
@@ -10,9 +11,19 @@ const QuizStart = ({ startQuiz }) => {
   };
 
   const handleStart = () => {
-    if (name.trim()) {
+    let invalid = false;
+    for (const character of specialCharacters) {
+      if (name.indexOf(character) > -1)
+        {
+          invalid = true;
+          alert("Invalid name! Special characters are not allowed!");
+          setName("")
+          break;
+        }
+    }
+    if (!invalid && name.trim()) {
       startQuiz(name);
-    } else {
+    } else  {
       alert("Bitte geben Sie einen Namen ein.");
     }
   };
@@ -31,6 +42,7 @@ const QuizStart = ({ startQuiz }) => {
             value={name}
             onChange={handleChange}
             className="input bg-bgColor text-second text-4xl "
+            maxLength={15}
           />
           <div className="flex max-sm:justify-end items-center max-sm:w-full">
             <Button
