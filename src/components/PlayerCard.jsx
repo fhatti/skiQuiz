@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const PlayerCard = ({ playerName, score, highScore, heartsArray }) => {
   return (
-    <div className=" bg-main w-full p-3 rounded-xl mt-0 mb-5 max-lg:h-[200px]">
+    <section className=" bg-main w-full p-3 rounded-xl mt-0 mb-5 max-lg:h-[200px]">
       <div className="text-center mb-4">{heartsArray}</div>
       <div className="flex flex-col justify-between items-center w-full">
         <img
@@ -29,7 +29,7 @@ const PlayerCard = ({ playerName, score, highScore, heartsArray }) => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

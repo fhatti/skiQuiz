@@ -36,8 +36,8 @@ const Leaderboard = () => {
   }
   if (players.length === 0) {
     return (
-      <div>
-        <h3 className="text-2xl p-2 mb-4 text-second">Leaderboard</h3>
+      <div className="">
+        <h3 className="text-2xl p-2 mb-4">Leaderboard</h3>
         <p className="text-4xl text-main">
           Noch keine Daten. Spielen Sie ein Spiel, um der Erste zu sein!{" "}
         </p>

@@ -57,6 +57,12 @@ const Questions = ({ playerName, startQuiz }) => {
   };
 
   const handleNextQuestion = () => {
+    if (lives === 0) {
+      setEndGame(true);
+      return;
+    }
+    if (score > highScore) setHighScore(score);
+
     if (questionIndex + 1 < questionsOrder.length) {
       setQuestionIndex(questionIndex + 1);
       setCurrentQuestion(questionsOrder[questionIndex + 1]);
@@ -94,12 +100,13 @@ const Questions = ({ playerName, startQuiz }) => {
       return "bg-wrong";
     return "";
   };
+
   if (!currentQuestion) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="flex flex-col justify-between items-center w-[800px] text-second rounded-2xl mt-10 overflow-x-hidden ">
+    <section className="flex flex-col justify-between items-center w-[800px] text-second rounded-2xl mt-10 overflow-x-hidden ">
       {endGame ? (
         <QuizEndStats
           score={score}
@@ -147,7 +154,7 @@ const Questions = ({ playerName, startQuiz }) => {
                       checked={selectedAnswer === index}
                       onChange={() => handleAnswerChange(index)}
                       disabled={submitted}
-                      className="p-10 mx-10 my-10"
+                      className="p-10 mx-10 my-6 text-start lg:max-w-12"
                     />
                     {ans.text}
                   </label>
@@ -155,7 +162,7 @@ const Questions = ({ playerName, startQuiz }) => {
               ))}
             </ul>
             {!submitted ? (
-              <div className="mt-10 flex justify-around items-center">
+              <div className="mt-10  flex justify-around items-center ">
                 <Button
                   text={"Antwort einreichen"}
                   func={handleSubmit}
@@ -192,7 +199,7 @@ const Questions = ({ playerName, startQuiz }) => {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

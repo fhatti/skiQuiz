@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import Player from "../models/Player";
+import Leaderboard from "../components/Leaderboard";
+
 const QuizEnd = ({
   playerName,
   score,
@@ -9,8 +11,6 @@ const QuizEnd = ({
   resetQuiz,
   startQuiz,
 }) => {
-  const [showStats, setShowStats] = useState(false);
-
   const getEndMessage = () => {
     switch (score) {
       case 10:
@@ -59,31 +59,39 @@ const QuizEnd = ({
   }, [playerName]);
 
   return (
-    <div className="text-center">
-      <h2>Quiz beendet!</h2>
-      <div className="flex justify-between items-center p-10 m-10">
+    <section className="flex flex-col">
+      <div className="flex flex-col p-2 justify-between items-center">
+        <h2 className="text-4xl font-bold">Quiz beendet!</h2>
+        <p className="p-2">{getPreviousScoreMessage()}</p>
+        <p className="text-xl mt-4 mb-2">
+          Sie haben <span className="text-main">{score}</span> / 10 korrekt
+          beantwortet
+        </p>
+      </div>
+      <div>
         <div>
-          <Button
-            func={() => setShowStats(!showStats)}
-            text={showStats ? "Statistiken verbergen" : "Statistiken anzeigen"}
-          />
-          {showStats && (
-            <div>
-              <p>Dein Endscore: {score}</p>
-              <p>Dein Highscore: {highScore}</p>
-            </div>
-          )}
+          <Leaderboard />
         </div>
-        <div>
-          <p>{getEndMessage()}</p>
-          <p>{getPreviousScoreMessage()}</p>
+        <div className="flex justify-center items-center ">
+          <p className="text-l w-[80%] m-10 ">{getEndMessage()}</p>
         </div>
       </div>
-      <div className="justify-center items-center inline-block">
-        <Button func={resetQuiz} text={"Quiz erneut starten"} />
-        <Button func={() => startQuiz("")} text={"Zum Start zurückkehren"} />
+      <div className="flex justify-between items-center ">
+        <Button
+          func={resetQuiz}
+          text={"Quiz erneut starten"}
+          bgColor={"bg-second"}
+          textColor={"text-bgColor"}
+          hoverBg={"hover:bg-main"}
+          hoverText={"hover:text-second"}
+        />
+        <Button
+          func={() => startQuiz("")}
+          text={"Zum Start zurückkehren"}
+          hoverText={"hover:font-thin"}
+        />
       </div>
-    </div>
+    </section>
   );
 };
 
