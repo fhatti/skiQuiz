@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import questionsData from "../data";
+import QuestionsList from "../models/Question";
 import QuizEndStats from "./QuizEndStats";
 import PlayerCard from "./PlayerCard";
 import Button from "./Button";
@@ -15,6 +16,8 @@ const Questions = ({ playerName, startQuiz }) => {
   const [questionsOrder, setQuestionsOrder] = useState([]);
   const [highScore, setHighScore] = useState(0);
   const [previousScore, setPreviousScore] = useState(null);
+  const questionsDataBase = new QuestionsList(questionsData);
+  questionsDataBase.writeQuestionsData();
   useEffect(() => {
     const shuffledQuestions = [...questionsData]
       .sort(() => 0.5 - Math.random())
@@ -96,7 +99,7 @@ const Questions = ({ playerName, startQuiz }) => {
   }
 
   return (
-    <div className="flex flex-col justify-between items-center w-[60%] text-second rounded-2xl mt-10">
+    <div className="flex flex-col justify-between items-center w-[800px] text-second rounded-2xl mt-10 overflow-x-hidden ">
       {endGame ? (
         <QuizEndStats
           score={score}
@@ -107,7 +110,7 @@ const Questions = ({ playerName, startQuiz }) => {
           playerName={playerName}
         />
       ) : (
-        <div>
+        <div className="w-full">
           <PlayerCard
             playerName={playerName}
             score={score}
@@ -115,8 +118,8 @@ const Questions = ({ playerName, startQuiz }) => {
             heartsArray={heartsArray}
           />
           <div>
-            <div className="flex justify-between items-center min-w-[770px]">
-              <p>
+            <div className="flex justify-between items-center w-full">
+              <p className="text-xs">
                 Kategorie:{" "}
                 <a
                   href={currentQuestion.categoryUrl}
@@ -126,7 +129,7 @@ const Questions = ({ playerName, startQuiz }) => {
                 </a>{" "}
               </p>
             </div>
-            <h3 className="text-4xl p-2">
+            <h3 className="text-4xl p-2 max-lg:text-2xl text-start">
               {questionIndex + 1}. {currentQuestion.question}
             </h3>
             <ul className="w-full p-4">
@@ -135,7 +138,7 @@ const Questions = ({ playerName, startQuiz }) => {
                   <label
                     className={`flex items-center w-full cursor-pointer ${
                       submitted ? getBackgroundColorClass(index) : ""
-                    }`}
+                    } my-2`}
                   >
                     <input
                       type="radio"
@@ -144,7 +147,7 @@ const Questions = ({ playerName, startQuiz }) => {
                       checked={selectedAnswer === index}
                       onChange={() => handleAnswerChange(index)}
                       disabled={submitted}
-                      className="p-10 mx-10 my-8"
+                      className="p-10 mx-10 my-10"
                     />
                     {ans.text}
                   </label>
@@ -158,6 +161,8 @@ const Questions = ({ playerName, startQuiz }) => {
                   func={handleSubmit}
                   disabled={selectedAnswer === null}
                   bgColor={"bg-second"}
+                  hoverBg={"hover:bg-main"}
+                  hoverText={"hover:text-second"}
                   textColor={"text-bgColor"}
                 />
                 <Button

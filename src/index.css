@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  @layer components {
+    .max-container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+  }
+ 
+ @layer utilities{
+    .input {
+        @apply sm:flex-1 max-sm:w-full text-base leading-normal pl-5 max-sm:p-5 outline-none sm:border-none border max-sm:border-main max-sm:rounded-full;
+      }
+ } 

@@ -9,11 +9,13 @@ const Button = ({
   fontW,
   func,
   disable,
+  rounded,
+  placeholderColor,
 }) => {
   return (
     <button
       type="submit"
-      className={`${bgColor} ${textColor} ${hoverBg} ${hoverText} ${fontW}  px-6 py-2`}
+      className={`${bgColor} ${textColor} ${hoverBg} ${hoverText} ${fontW} ${rounded} ${placeholderColor} px-6 py-2`}
       onClick={func}
       disabled={disable}
     >
