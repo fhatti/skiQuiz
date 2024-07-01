@@ -154,7 +154,7 @@ const Questions = ({ playerName, startQuiz }) => {
                       checked={selectedAnswer === index}
                       onChange={() => handleAnswerChange(index)}
                       disabled={submitted}
-                      className="p-10 mx-10 my-6 text-start lg:max-w-12"
+                      className="p-2 mx-10 my-2 text-start h-8 "
                     />
                     {ans.text}
                   </label>
